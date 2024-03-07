@@ -1,5 +1,5 @@
-import Avatar from "@/app/_components/avatar";
-import CoverImage from "@/app/_components/cover-image";
+import Avatar from "@/app/components/avatar";
+import CoverImage from "@/app/components/cover-image";
 import { type Author } from "@/interfaces/author";
 import Link from "next/link";
 import DateFormatter from "./date-formatter";
@@ -28,7 +28,7 @@ export function HeroPost({
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>
-          <h3 className="mb-4 text-4xl lg:text-5xl leading-tight">
+          <h3 className="font-bold mb-4 text-3xl lg:text-5xl leading-tight">
             <Link
               as={`/posts/${slug}`}
               href="/posts/[slug]"

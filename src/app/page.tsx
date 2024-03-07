@@ -1,29 +1,37 @@
-import Container from "@/app/_components/container";
-import { HeroPost } from "@/app/_components/hero-post";
-import { Intro } from "@/app/_components/intro";
-import { MoreStories } from "@/app/_components/more-stories";
-import { getAllPosts } from "../lib/api";
+import Container from "@/app/components/container";
+import { Intro } from "@/app/components/intro";
+import { getAllSections } from "../lib/api";
+import Link from "next/link";
 
 export default function Index() {
-  const allPosts = getAllPosts();
-
-  const heroPost = allPosts[0];
-
-  const morePosts = allPosts.slice(1);
+  const allSections = getAllSections();
+  console.log(
+    "Sections",
+    allSections[0].sections.map((section) => section)
+  );
 
   return (
     <main>
       <Container>
-        <Intro />
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <section className="flex flex-col gap-4 pb-4 justify-center mt-6">
+          {allSections[0].sections.map((section, i) => (
+            <Link href={section.slug} aria-label={section.link}>
+              <div
+                key={i}
+                className="rounded-lg flex flex-col gap-4 border  h-40 justify-center align-middle p-8 hover:bg-zinc-50  after:bg-zinc-50 dark:hover:bg-slate-900 dark:active:bg-slate-900"
+              >
+                <h6 className="text-center text-lg font-bold dark:text-zinc-100">
+                  {section.title}
+                </h6>
+                {section.description && (
+                  <p className="text-center text-balance font-light dark:text-zinc-100">
+                    {section.description}
+                  </p>
+                )}
+              </div>
+            </Link>
+          ))}
+        </section>
       </Container>
     </main>
   );
